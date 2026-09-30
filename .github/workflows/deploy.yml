@@ -45,7 +45,7 @@ jobs:
           ln -sfn "$R" /opt/perfectsolution/current
           cd /opt/perfectsolution/current
 
-          "$S/venv/bin/python" manage.py makemigrations shop --noinput
+          "$S/venv/bin/python" manage.py makemigrations --check --dry-run
           "$S/venv/bin/python" manage.py migrate --noinput
           "$S/venv/bin/python" manage.py seed_demo
           "$S/venv/bin/python" manage.py collectstatic --noinput
