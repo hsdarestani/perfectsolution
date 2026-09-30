@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b3b3b">
+  <title>Perfect Solution GmbH | Reinigungsbedarf und Hygiene</title>
+  <meta name="description" content="Perfect Solution GmbH in Dietzenbach. Professioneller Reinigungsbedarf, Hygieneartikel, Verbrauchsmaterial und Ausstattung für Gewerbe.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="app.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Perfect Solution GmbH",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dietzenbach",
+      "addressCountry": "DE"
+    },
+    "areaServed": "Rhein Main",
+    "url": "https://github.com/hsdarestani/perfectsolution"
+  }
+  </script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-copy">
+        <span><i data-lucide="truck"></i> Schnelle Lieferung für Gewerbekunden</span>
+        <span class="topbar-secondary"><i data-lucide="map-pin"></i> Standort Dietzenbach</span>
+      </div>
+      <a href="#konto" class="topbar-link">Geschäftskonto beantragen</a>
+    </div>
+  </div>
+
+  <header class="site-header" id="start">
+    <div class="container header-main">
+      <a class="brand" href="#start" aria-label="Perfect Solution Startseite">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="brand-bubble one"></span>
+          <span class="brand-bubble two"></span>
+          <span class="brand-bubble three"></span>
+          <span class="brand-spark">✦</span>
+        </span>
+        <span class="brand-copy">
+          <strong>Perfect Solution</strong>
+          <small>PROFESSIONAL HYGIENE</small>
+        </span>
+      </a>
+
+      <form class="search" id="searchForm">
+        <i data-lucide="search"></i>
+        <input id="searchInput" type="search" placeholder="Produkte, Kategorien oder Artikel suchen" autocomplete="off">
+        <button type="submit">Suchen</button>
+      </form>
+
+      <div class="header-actions">
+        <button class="icon-action" id="accountButton" type="button" aria-label="Konto öffnen">
+          <i data-lucide="user-round"></i>
+          <span>Konto</span>
+        </button>
+        <button class="icon-action cart-action" id="cartButton" type="button" aria-label="Anfragekorb öffnen">
+          <i data-lucide="shopping-bag"></i>
+          <span>Anfrage</span>
+          <strong id="cartCount">0</strong>
+        </button>
+        <button class="menu-button" id="menuButton" type="button" aria-label="Menü öffnen">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav class="main-nav" id="mainNav">
+      <div class="container nav-inner">
+        <button class="category-trigger" id="categoryTrigger" type="button">
+          <i data-lucide="layout-grid"></i>
+          Alle Kategorien
+          <i data-lucide="chevron-down"></i>
+        </button>
+        <a href="#produkte">Produkte</a>
+        <a href="#kategorien">Kategorien</a>
+        <a href="#vorteile">Für Gewerbe</a>
+        <a href="#beratung">Beratung</a>
+        <a href="#kontakt">Kontakt</a>
+        <a class="offer-link" href="#produkte"><i data-lucide="badge-percent"></i> Angebote</a>
+      </div>
+      <div class="category-panel" id="categoryPanel">
+        <div class="container category-panel-grid">
+          <button data-category="Reinigungsmittel"><i data-lucide="spray-can"></i><span>Reinigungsmittel</span></button>
+          <button data-category="Hygiene und Papier"><i data-lucide="scroll"></i><span>Hygiene und Papier</span></button>
+          <button data-category="Tücher und Mopps"><i data-lucide="sparkles"></i><span>Tücher und Mopps</span></button>
+          <button data-category="Müllentsorgung"><i data-lucide="trash-2"></i><span>Müllentsorgung</span></button>
+          <button data-category="Arbeitsschutz"><i data-lucide="shield-check"></i><span>Arbeitsschutz</span></button>
+          <button data-category="Maschinen und Geräte"><i data-lucide="settings"></i><span>Maschinen und Geräte</span></button>
+          <button data-category="Spendersysteme"><i data-lucide="hand"></i><span>Spendersysteme</span></button>
+          <button data-category="Reinigungswagen"><i data-lucide="shopping-cart"></i><span>Reinigungswagen</span></button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow"><i data-lucide="sparkles"></i> Sauber. Professionell. Verlässlich.</span>
+          <h1>Alles für professionelle <span>Reinigung und Hygiene</span></h1>
+          <p>Reinigungsbedarf für Unternehmen, Gebäudereinigung, Gastronomie, Praxen und Objektservice. Persönliche Beratung aus Dietzenbach und ein Einkaufserlebnis, das schnell zum richtigen Produkt führt.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#kategorien">Sortiment entdecken <i data-lucide="arrow-right"></i></a>
+            <a class="button secondary" href="#konto">Geschäftskonto beantragen</a>
+          </div>
+          <div class="hero-trust">
+            <span><i data-lucide="badge-check"></i> Gewerbekonditionen</span>
+            <span><i data-lucide="headphones"></i> Persönliche Beratung</span>
+            <span><i data-lucide="package-check"></i> Große Auswahl</span>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="https://images.pexels.com/photos/5217888/pexels-photo-5217888.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Professionelle Reinigungsprodukte">
+          <div class="hero-card hero-card-one">
+            <span class="hero-card-icon"><i data-lucide="building-2"></i></span>
+            <div><strong>B2B Fokus</strong><small>für professionelle Anwender</small></div>
+          </div>
+          <div class="hero-card hero-card-two">
+            <strong>8</strong>
+            <span>starke Sortimentsbereiche</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-benefits" id="vorteile">
+      <div class="container benefit-grid">
+        <article><i data-lucide="package-open"></i><div><strong>Großhandel Sortiment</strong><span>Bedarf für kleine und große Objekte</span></div></article>
+        <article><i data-lucide="messages-square"></i><div><strong>Direkte Beratung</strong><span>Produkte passend zum Einsatzzweck</span></div></article>
+        <article><i data-lucide="receipt-text"></i><div><strong>Geschäftskunden</strong><span>Individuelle Konditionen möglich</span></div></article>
+        <article><i data-lucide="map-pinned"></i><div><strong>Dietzenbach</strong><span>Stark im Rhein Main Gebiet</span></div></article>
+      </div>
+    </section>
+
+    <section class="section categories-section" id="kategorien">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="eyebrow">Sortiment</span><h2>Direkt zur richtigen Kategorie</h2></div>
+          <p>Klare Wege für häufig bestellte Produkte. Ideal für tägliche Beschaffung und regelmäßige Nachbestellung.</p>
+        </div>
+        <div class="category-cards">
+          <button class="category-card large" data-category="Reinigungsmittel">
+            <img src="https://images.pexels.com/photos/5217900/pexels-photo-5217900.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+            <span class="category-overlay"></span>
+            <span class="category-content"><small>01</small><strong>Reinigungsmittel</strong><em>Allzweck, Sanitär, Glas, Boden und Spezial</em><i data-lucide="arrow-up-right"></i></span>
+          </button>
+          <button class="category-card" data-category="Hygiene und Papier">
+            <img src="https://images.pexels.com/photos/5217896/pexels-photo-5217896.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="">
+            <span class="category-overlay"></span>
+            <span class="category-content"><small>02</small><strong>Hygiene und Papier</strong><em>Papier, Seife und Verbrauchsmaterial</em><i data-lucide="arrow-up-right"></i></span>
+          </button>
+          <button class="category-card" data-category="Maschinen und Geräte">
+            <img src="https://images.pexels.com/photos/34516664/pexels-photo-34516664.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="">
+            <span class="category-overlay"></span>
+            <span class="category-content"><small>03</small><strong>Maschinen und Geräte</strong><em>Für professionelle Reinigungstechnik</em><i data-lucide="arrow-up-right"></i></span>
+          </button>
+          <button class="category-card" data-category="Tücher und Mopps">
+            <img src="https://images.pexels.com/photos/5217897/pexels-photo-5217897.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="">
+            <span class="category-overlay"></span>
+            <span class="category-content"><small>04</small><strong>Tücher und Mopps</strong><em>Effiziente textile Reinigungssysteme</em><i data-lucide="arrow-up-right"></i></span>
+          </button>
+          <button class="category-card wide" data-category="Arbeitsschutz">
+            <img src="https://images.pexels.com/photos/10558189/pexels-photo-10558189.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+            <span class="category-overlay"></span>
+            <span class="category-content"><small>05</small><strong>Arbeitsschutz und Verbrauch</strong><em>Handschuhe, Schutzbedarf und tägliche Ausstattung</em><i data-lucide="arrow-up-right"></i></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section products-section" id="produkte">
+      <div class="container">
+        <div class="section-heading products-heading">
+          <div><span class="eyebrow">Schnellauswahl</span><h2>Beliebte Produkte</h2></div>
+          <div class="product-controls">
+            <button class="filter active" data-filter="Alle">Alle</button>
+            <button class="filter" data-filter="Reinigungsmittel">Reiniger</button>
+            <button class="filter" data-filter="Hygiene und Papier">Hygiene</button>
+            <button class="filter" data-filter="Tücher und Mopps">Textil</button>
+          </div>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+        <div class="empty-state" id="emptyState">
+          <i data-lucide="search-x"></i>
+          <strong>Keine passenden Produkte gefunden</strong>
+          <span>Versuchen Sie einen anderen Suchbegriff oder setzen Sie den Filter zurück.</span>
+          <button class="text-button" id="resetSearch" type="button">Alle Produkte anzeigen</button>
+        </div>
+
+        <div class="catalog-note">
+          <div><i data-lucide="info"></i><strong>Katalog Demo</strong></div>
+          <p>Die Produktstruktur ist für den späteren echten Warenbestand vorbereitet. Artikel, Preise, Marken und Verfügbarkeiten können anschließend mit den Daten von Perfect Solution ersetzt werden.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="business-section" id="konto">
+      <div class="container business-card">
+        <div class="business-copy">
+          <span class="eyebrow light">Für Gewerbekunden</span>
+          <h2>Bessere Beschaffung beginnt mit einem Geschäftskonto.</h2>
+          <p>Nach Freischaltung können individuelle Konditionen, wiederkehrende Bestellungen und auf Wunsch objektbezogene Produktlisten angeboten werden.</p>
+          <div class="business-points">
+            <span><i data-lucide="check"></i> Individuelle Konditionen</span>
+            <span><i data-lucide="check"></i> Schnelle Nachbestellung</span>
+            <span><i data-lucide="check"></i> Persönlicher Ansprechpartner</span>
+          </div>
+        </div>
+        <form class="business-form" id="businessForm">
+          <h3>Geschäftskonto anfragen</h3>
+          <label>Unternehmen<input required name="company" type="text" placeholder="Firmenname"></label>
+          <div class="form-row">
+            <label>Name<input required name="name" type="text" placeholder="Vorname und Nachname"></label>
+            <label>Telefon<input name="phone" type="tel" placeholder="Telefonnummer"></label>
+          </div>
+          <label>E Mail<input required name="email" type="email" placeholder="name@firma.de"></label>
+          <label class="checkbox"><input required type="checkbox"><span>Ich stimme der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage zu.</span></label>
+          <button class="button primary full" type="submit">Anfrage senden <i data-lucide="send"></i></button>
+          <small class="form-status" id="businessStatus"></small>
+        </form>
+      </div>
+    </section>
+
+    <section class="section advisory-section" id="beratung">
+      <div class="container advisory-grid">
+        <div class="advisory-visual">
+          <img src="https://images.pexels.com/photos/35871082/pexels-photo-35871082.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Sortiment mit professionellen Reinigungsprodukten">
+          <span class="advisory-badge"><i data-lucide="thumbs-up"></i> Persönlich ausgewählt</span>
+        </div>
+        <div class="advisory-copy">
+          <span class="eyebrow">Beratung statt Überforderung</span>
+          <h2>Das passende Produkt für Ihren Einsatzbereich.</h2>
+          <p>Ein großes Sortiment ist nur dann hilfreich, wenn man schnell die passende Lösung findet. Deshalb verbindet Perfect Solution den Webshop mit persönlicher Beratung für Gewerbekunden.</p>
+          <div class="advisory-list">
+            <article><span>01</span><div><strong>Bedarf klären</strong><p>Objektart, Fläche, Material und gewünschte Anwendung.</p></div></article>
+            <article><span>02</span><div><strong>Produkte auswählen</strong><p>Passende Mittel, Zubehör und Verbrauchsartikel kombinieren.</p></div></article>
+            <article><span>03</span><div><strong>Einfach nachbestellen</strong><p>Häufig benötigte Artikel später mit wenigen Klicks erneut anfragen.</p></div></article>
+          </div>
+          <a href="#kontakt" class="button dark">Beratung anfragen <i data-lucide="arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-section">
+      <div class="container faq-grid">
+        <div>
+          <span class="eyebrow">Häufige Fragen</span>
+          <h2>Für einen einfachen Einkauf.</h2>
+          <p>Die wichtigsten Informationen für Unternehmen und professionelle Anwender.</p>
+        </div>
+        <div class="faq-list">
+          <details open><summary>Kann ich als Unternehmen Sonderkonditionen erhalten?<i data-lucide="plus"></i></summary><p>Ja. Über die Anfrage für ein Geschäftskonto können individuelle Konditionen und regelmäßige Bedarfe abgestimmt werden.</p></details>
+          <details><summary>Ist das Sortiment nur für Gebäudereiniger?<i data-lucide="plus"></i></summary><p>Nein. Das Sortiment richtet sich auch an Gastronomie, Praxen, Büros, Hausverwaltungen, Objektservice und weitere Gewerbekunden.</p></details>
+          <details><summary>Kann ich eine Produktempfehlung erhalten?<i data-lucide="plus"></i></summary><p>Ja. Für Anwendungen und Objektarten können passende Produkte und Zubehör gemeinsam ausgewählt werden.</p></details>
+          <details><summary>Wo sitzt Perfect Solution GmbH?<i data-lucide="plus"></i></summary><p>Der Unternehmensstandort ist Dietzenbach.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="kontakt">
+      <div class="container contact-grid">
+        <div>
+          <span class="eyebrow light">Kontakt</span>
+          <h2>Sie wissen, was Sie brauchen. Oder wir finden es gemeinsam heraus.</h2>
+        </div>
+        <div class="contact-actions">
+          <a href="#konto"><i data-lucide="building-2"></i><span><small>Für Unternehmen</small><strong>Geschäftskonto anfragen</strong></span><i data-lucide="arrow-up-right"></i></a>
+          <a href="#produkte"><i data-lucide="shopping-basket"></i><span><small>Direkt starten</small><strong>Produkte auswählen</strong></span><i data-lucide="arrow-up-right"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand inverse" href="#start">
+          <span class="brand-mark"><span class="brand-bubble one"></span><span class="brand-bubble two"></span><span class="brand-bubble three"></span><span class="brand-spark">✦</span></span>
+          <span class="brand-copy"><strong>Perfect Solution</strong><small>PROFESSIONAL HYGIENE</small></span>
+        </a>
+        <p>Professioneller Reinigungsbedarf und Hygiene für Unternehmen. Standort Dietzenbach.</p>
+      </div>
+      <div><strong>Sortiment</strong><a href="#kategorien">Reinigungsmittel</a><a href="#kategorien">Hygiene und Papier</a><a href="#kategorien">Maschinen und Geräte</a><a href="#kategorien">Arbeitsschutz</a></div>
+      <div><strong>Service</strong><a href="#konto">Geschäftskonto</a><a href="#beratung">Beratung</a><a href="#produkte">Anfragekorb</a><a href="#kontakt">Kontakt</a></div>
+      <div><strong>Unternehmen</strong><span>Perfect Solution GmbH</span><span>Dietzenbach</span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> Perfect Solution GmbH</span><span>Webshop Konzept für professionelle Beschaffung</span></div>
+  </footer>
+
+  <aside class="drawer" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-head"><div><small>Ihre Auswahl</small><h3>Anfragekorb</h3></div><button id="closeCart" type="button" aria-label="Anfragekorb schließen"><i data-lucide="x"></i></button></div>
+    <div class="drawer-body" id="cartItems"></div>
+    <div class="drawer-empty" id="cartEmpty"><i data-lucide="shopping-bag"></i><strong>Noch keine Produkte</strong><span>Fügen Sie Produkte hinzu und senden Sie danach eine gemeinsame Anfrage.</span></div>
+    <div class="drawer-footer" id="cartFooter">
+      <div class="drawer-total"><span>Positionen</span><strong id="cartTotalItems">0</strong></div>
+      <button class="button primary full" id="requestButton" type="button">Anfrage vorbereiten <i data-lucide="arrow-right"></i></button>
+      <small>Preise und Verfügbarkeit werden nach Prüfung bestätigt.</small>
+    </div>
+  </aside>
+  <div class="backdrop" id="backdrop"></div>
+
+  <div class="modal" id="accountModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeAccount" type="button" aria-label="Fenster schließen"><i data-lucide="x"></i></button>
+      <span class="modal-icon"><i data-lucide="user-round"></i></span>
+      <small>Perfect Solution Konto</small>
+      <h3>Für Geschäftskunden vorbereitet</h3>
+      <p>Login und Kundenkonto werden im nächsten Schritt mit dem echten Shopsystem verbunden. Für die erste Freischaltung können Sie bereits eine Anfrage senden.</p>
+      <a class="button primary full" href="#konto" id="accountCta">Geschäftskonto beantragen</a>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"><i data-lucide="check-circle-2"></i><span></span></div>
+</body>
+</html>
