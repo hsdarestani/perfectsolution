@@ -33,7 +33,7 @@ class Product(models.Model):
     stock=models.IntegerField("Bestand",default=0)
     min_order_qty=models.PositiveIntegerField("Mindestmenge",default=1)
     unit=models.CharField("Einheit",max_length=12,choices=UNITS,default="Stk")
-    image=models.ImageField("Produktbild",upload_to="products/%Y/%m/",blank=True,null=True)
+    image=models.FileField("Produktbild",upload_to="products/%Y/%m/",blank=True,null=True)
     active=models.BooleanField("Im Shop sichtbar",default=True)
     featured=models.BooleanField("Auf Startseite",default=False)
     created_at=models.DateTimeField(auto_now_add=True)
