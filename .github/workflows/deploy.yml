@@ -88,6 +88,9 @@ jobs:
           for URL in "https://perfectsolution.smarbiz.sbs/" "https://perfectsolution.smarbiz.sbs/produkte/"; do
             if ! curl -fsS -o /tmp/page.out "$URL"; then
               echo "Public page failed: $URL"
+              echo "--- reproduce through Django test client ---"
+              cd /opt/perfectsolution/current
+              DJANGO_DEBUG=1 "$S/venv/bin/python" manage.py shell -c 'from django.test import Client; Client(raise_request_exception=True).get("/", HTTP_HOST="perfectsolution.smarbiz.sbs", secure=True)' || true
               echo "--- systemd status ---"
               systemctl status perfectsolution --no-pager -l || true
               echo "--- django logs ---"
