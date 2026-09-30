@@ -1,0 +1,1 @@
+{% extends "shop/base.html" %}{% block content %}<section class="success"><div><span>✓</span><h1>Vielen Dank.</h1><p>Bestellung <b>{{ order.number }}</b> wurde gespeichert.</p><p>{{ order.gross_total|floatformat:2 }} € · {{ order.get_payment_method_display }}</p><a class="btn" href="/produkte/">Weiter einkaufen</a></div></section>{% endblock %}

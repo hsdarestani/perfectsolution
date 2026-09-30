@@ -1,0 +1,58 @@
+name: Deploy Perfect Solution
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: perfectsolution-production
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq sshpass rsync
+      - name: Upload
+        env:
+          SSHPASS: ${{ secrets.PASS }}
+          HOST: ${{ secrets.HOST }}
+        run: |
+          test -n "$HOST" && test -n "$SSHPASS"
+          sshpass -e ssh -o StrictHostKeyChecking=no root@"$HOST" "mkdir -p /opt/perfectsolution/releases/${GITHUB_SHA} /opt/perfectsolution/shared/media"
+          sshpass -e rsync -az --delete --exclude '.git' --exclude 'db.sqlite3' --exclude 'media' --exclude 'staticfiles' -e "ssh -o StrictHostKeyChecking=no" ./ root@"$HOST":/opt/perfectsolution/releases/${GITHUB_SHA}/
+      - name: Activate
+        env:
+          SSHPASS: ${{ secrets.PASS }}
+          HOST: ${{ secrets.HOST }}
+        run: |
+          sshpass -e ssh -o StrictHostKeyChecking=no root@"$HOST" "GITHUB_SHA=${GITHUB_SHA} bash -s" <<'REMOTE'
+          set -e
+          R="/opt/perfectsolution/releases/$GITHUB_SHA"
+          S="/opt/perfectsolution/shared"
+          apt-get update -qq
+          DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3-venv nginx certbot python3-certbot-nginx
+          if [ ! -f "$S/.env" ]; then
+            SECRET=$(python3 -c 'import secrets;print(secrets.token_urlsafe(48))')
+            printf "DJANGO_SECRET_KEY=%s\nDJANGO_ALLOWED_HOSTS=perfectsolution.smarbiz.sbs,127.0.0.1,localhost\nDJANGO_DEBUG=0\nDJANGO_SECURE=0\nSQLITE_PATH=%s/db.sqlite3\nMEDIA_ROOT=%s/media\n" "$SECRET" "$S" "$S" > "$S/.env"
+          fi
+          [ -d "$S/venv" ] || python3 -m venv "$S/venv"
+          "$S/venv/bin/pip" install -q --upgrade pip
+          "$S/venv/bin/pip" install -q -r "$R/requirements.txt"
+          ln -sfn "$R" /opt/perfectsolution/current
+          cd /opt/perfectsolution/current
+          "$S/venv/bin/python" manage.py makemigrations shop --noinput
+          "$S/venv/bin/python" manage.py migrate --noinput
+          "$S/venv/bin/python" manage.py seed_demo
+          "$S/venv/bin/python" manage.py collectstatic --noinput
+          cp deploy/perfectsolution.service /etc/systemd/system/perfectsolution.service
+          cp deploy/nginx.conf /etc/nginx/sites-available/perfectsolution
+          ln -sfn /etc/nginx/sites-available/perfectsolution /etc/nginx/sites-enabled/perfectsolution
+          rm -f /etc/nginx/sites-enabled/default
+          systemctl daemon-reload
+          systemctl enable perfectsolution --now
+          systemctl restart perfectsolution
+          nginx -t && systemctl reload nginx
+          certbot --nginx -d perfectsolution.smarbiz.sbs --non-interactive --agree-tos --register-unsafely-without-email --redirect || true
+          if [ -f /etc/letsencrypt/live/perfectsolution.smarbiz.sbs/fullchain.pem ]; then sed -i 's/DJANGO_SECURE=0/DJANGO_SECURE=1/' "$S/.env"; systemctl restart perfectsolution; fi
+          curl -fsS http://127.0.0.1:8091/health/
+          REMOTE
