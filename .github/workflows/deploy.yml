@@ -88,9 +88,19 @@ jobs:
           for URL in "https://perfectsolution.smarbiz.sbs/" "https://perfectsolution.smarbiz.sbs/produkte/"; do
             if ! curl -fsS -o /tmp/page.out "$URL"; then
               echo "Public page failed: $URL"
+              echo "--- external response ---"
+              curl -skS -D - "https://perfectsolution.smarbiz.sbs/" -o /tmp/external.body || true
+              head -c 2000 /tmp/external.body || true
+              echo
+              echo "--- direct local nginx response ---"
+              curl -skS -D - --resolve perfectsolution.smarbiz.sbs:443:127.0.0.1 "https://perfectsolution.smarbiz.sbs/" -o /tmp/local.body || true
+              head -c 2000 /tmp/local.body || true
+              echo
               echo "--- reproduce through Django test client ---"
               cd /opt/perfectsolution/current
-              DJANGO_DEBUG=1 "$S/venv/bin/python" manage.py shell -c 'from django.test import Client; Client(raise_request_exception=True).get("/", HTTP_HOST="perfectsolution.smarbiz.sbs", secure=True)' || true
+              DJANGO_DEBUG=1 "$S/venv/bin/python" manage.py shell -c 'from django.test import Client; r=Client(raise_request_exception=True).get("/", HTTP_HOST="perfectsolution.smarbiz.sbs", secure=True); print("status", r.status_code); print(r.content[:500])' || true
+              echo "--- active nginx config ---"
+              nginx -T 2>&1 | sed -n '/server_name perfectsolution.smarbiz.sbs/,+60p' || true
               echo "--- systemd status ---"
               systemctl status perfectsolution --no-pager -l || true
               echo "--- django logs ---"
