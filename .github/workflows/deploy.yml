@@ -83,4 +83,18 @@ jobs:
             journalctl -u perfectsolution -n 120 --no-pager || true
             exit 1
           fi
+
+          echo "Checking public pages"
+          for URL in "https://perfectsolution.smarbiz.sbs/" "https://perfectsolution.smarbiz.sbs/produkte/"; do
+            if ! curl -fsS -o /tmp/page.out "$URL"; then
+              echo "Public page failed: $URL"
+              echo "--- systemd status ---"
+              systemctl status perfectsolution --no-pager -l || true
+              echo "--- django logs ---"
+              journalctl -u perfectsolution -n 160 --no-pager || true
+              echo "--- nginx error log ---"
+              tail -n 100 /var/log/nginx/error.log || true
+              exit 1
+            fi
+          done
           REMOTE
