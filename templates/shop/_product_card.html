@@ -1,40 +1,28 @@
 <article class="product-card">
-  <a class="product-media" href="{{ product.get_absolute_url }}">
-    <div class="product-badges">
-      {% if product.featured %}<span class="badge badge-dark">Empfohlen</span>{% endif %}
-      {% if product.stock <= 0 %}<span class="badge badge-muted">Nicht verfügbar</span>{% endif %}
+  <a class="product-image" href="{{ product.get_absolute_url }}">
+    <div class="product-flags">
+      {% if product.featured %}<span>EMPFOHLEN</span>{% endif %}
+      {% if product.stock <= 0 %}<span class="muted">NICHT VERFÜGBAR</span>{% endif %}
     </div>
     {% if product.image %}
       <img src="{{ product.image.url }}" alt="{{ product.name }}">
     {% else %}
-      <div class="product-placeholder">
-        <span>PS</span>
-        <small>PERFECT SOLUTION</small>
-      </div>
+      <div class="product-empty"><b>PS</b><span>PROFESSIONAL HYGIENE</span></div>
     {% endif %}
   </a>
-  <div class="product-info">
-    <div class="product-meta">
-      <span>{{ product.category.name }}</span>
-      <span>{{ product.sku }}</span>
-    </div>
+  <div class="product-content">
+    <div class="product-topline"><span>{{ product.category.name }}</span><span>{{ product.sku }}</span></div>
     <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
-    <p>{{ product.short_description|default:"Professioneller Reinigungsbedarf für den täglichen Einsatz." }}</p>
-    <div class="stock-row {% if product.stock <= 0 %}stock-out{% elif product.stock <= 5 %}stock-low{% endif %}">
-      <span class="stock-dot"></span>
-      <span>{{ product.stock_label }}</span>
+    <p>{{ product.short_description|default:"Professioneller Reinigungsbedarf für den täglichen gewerblichen Einsatz." }}</p>
+    <div class="availability {% if product.stock <= 0 %}out{% elif product.stock <= 5 %}low{% endif %}">
+      <i></i><span>{{ product.stock_label }}</span>
     </div>
-    <div class="product-buy">
-      <div class="price-block">
-        <strong>{{ product.net_price|floatformat:2 }} €</strong>
-        <span>netto je {{ product.unit }}</span>
-      </div>
+    <div class="product-bottom">
+      <div class="product-price"><strong>{{ product.net_price|floatformat:2 }} €</strong><small>netto je {{ product.unit }}</small></div>
       <form method="post" action="{% url 'shop:cart_add' product.id %}">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ request.get_full_path }}">
-        <button class="add-button" type="submit" aria-label="{{ product.name }} in den Warenkorb" {% if product.stock <= 0 %}disabled{% endif %}>
-          <span>+</span>
-        </button>
+        <button aria-label="{{ product.name }} in den Warenkorb" {% if product.stock <= 0 %}disabled{% endif %}>+</button>
       </form>
     </div>
   </div>

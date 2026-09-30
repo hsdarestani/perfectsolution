@@ -1,73 +1,53 @@
 {% extends "shop/base.html" %}
 {% block title %}{{ product.name }} | Perfect Solution{% endblock %}
 {% block content %}
-<section class="product-detail-section">
-  <div class="shell">
-    <div class="breadcrumbs">
-      <a href="{% url 'shop:home' %}">Start</a><span>›</span>
-      <a href="{% url 'shop:product_list' %}">Produkte</a><span>›</span>
-      <a href="{% url 'shop:product_list' %}?category={{ product.category.slug }}">{{ product.category.name }}</a>
-    </div>
-
-    <div class="product-detail-layout">
-      <div class="product-gallery">
-        <div class="gallery-badge">Professional</div>
-        {% if product.image %}
-          <img src="{{ product.image.url }}" alt="{{ product.name }}">
-        {% else %}
-          <div class="detail-placeholder">
-            <span>PS</span>
-            <strong>PERFECT SOLUTION</strong>
-            <small>PROFESSIONAL HYGIENE</small>
-          </div>
-        {% endif %}
+<section class="detail-section">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Start</a><span>/</span><a href="{% url 'shop:product_list' %}">Produkte</a><span>/</span><a href="{% url 'shop:product_list' %}?category={{ product.category.slug }}">{{ product.category.name }}</a></div>
+    <div class="detail-grid">
+      <div class="detail-media">
+        <span class="detail-label">PROFESSIONAL</span>
+        {% if product.image %}<img src="{{ product.image.url }}" alt="{{ product.name }}">{% else %}<div class="detail-empty"><b>PS</b><span>PERFECT SOLUTION</span><small>PROFESSIONAL HYGIENE</small></div>{% endif %}
       </div>
 
-      <div class="product-detail-info">
-        <div class="detail-meta">
-          <span>{{ product.category.name }}</span>
-          <span>Artikel {{ product.sku }}</span>
-          {% if product.ean %}<span>EAN {{ product.ean }}</span>{% endif %}
-        </div>
+      <div class="detail-info">
+        <div class="detail-meta"><span>{{ product.category.name }}</span><span>ART {{ product.sku }}</span>{% if product.ean %}<span>EAN {{ product.ean }}</span>{% endif %}</div>
         <h1>{{ product.name }}</h1>
-        <p class="detail-lead">{{ product.short_description|default:"Professionelle Qualität für den täglichen gewerblichen Einsatz." }}</p>
+        <p class="detail-intro">{{ product.short_description|default:"Professionelle Qualität für den täglichen gewerblichen Einsatz." }}</p>
 
-        <div class="detail-status">
-          <div class="stock-row {% if product.stock <= 0 %}stock-out{% elif product.stock <= 5 %}stock-low{% endif %}">
-            <span class="stock-dot"></span><strong>{{ product.stock_label }}</strong>
-          </div>
+        <div class="detail-stock">
+          <div class="availability {% if product.stock <= 0 %}out{% elif product.stock <= 5 %}low{% endif %}"><i></i><strong>{{ product.stock_label }}</strong></div>
           <span>{{ product.stock }} {{ product.unit }} verfügbar</span>
         </div>
 
-        <div class="detail-purchase">
-          <div class="detail-price">
-            <span>Geschäftskundenpreis</span>
-            <strong>{{ product.net_price|floatformat:2 }} €</strong>
-            <small>netto je {{ product.unit }} · zzgl. {{ product.vat_rate|floatformat:0 }} % MwSt.</small>
-          </div>
-          <form class="detail-add" method="post" action="{% url 'shop:cart_add' product.id %}">
+        <div class="purchase-box">
+          <div class="purchase-price"><small>Nettopreis</small><strong>{{ product.net_price|floatformat:2 }} €</strong><span>je {{ product.unit }} · zzgl. {{ product.vat_rate|floatformat:0 }} % MwSt.</span></div>
+          <form method="post" action="{% url 'shop:cart_add' product.id %}">
             {% csrf_token %}
-            <label>Menge
-              <input type="number" name="quantity" min="{{ product.min_order_qty }}" value="{{ product.min_order_qty }}">
-            </label>
-            <button class="button button-primary" type="submit" {% if product.stock <= 0 %}disabled{% endif %}>In den Warenkorb <span>→</span></button>
+            <label>Menge<input type="number" name="quantity" min="{{ product.min_order_qty }}" value="{{ product.min_order_qty }}"></label>
+            <button class="btn primary" {% if product.stock <= 0 %}disabled{% endif %}>In den Warenkorb <span>→</span></button>
           </form>
         </div>
 
-        <div class="detail-benefits">
-          <div><b>✓</b><span><strong>Profi Qualität</strong><small>Für gewerbliche Anwendungen</small></span></div>
-          <div><b>✓</b><span><strong>Klare Verfügbarkeit</strong><small>Bestand direkt sichtbar</small></span></div>
-          <div><b>✓</b><span><strong>Persönlicher Service</strong><small>Direkte Beratung möglich</small></span></div>
+        <div class="detail-specs">
+          <div><span>Artikelnummer</span><strong>{{ product.sku }}</strong></div>
+          <div><span>Einheit</span><strong>{{ product.get_unit_display }}</strong></div>
+          <div><span>Mindestmenge</span><strong>{{ product.min_order_qty }} {{ product.unit }}</strong></div>
+          <div><span>Bestand</span><strong>{{ product.stock }} {{ product.unit }}</strong></div>
         </div>
 
         {% if product.description %}
-        <div class="detail-description">
-          <span class="section-kicker">Produktinformation</span>
-          {{ product.description|linebreaks }}
-        </div>
+        <div class="detail-description"><span class="overline">Produktinformation</span>{{ product.description|linebreaks }}</div>
         {% endif %}
       </div>
     </div>
+
+    {% if related %}
+    <div class="related">
+      <div class="section-title product-title"><div><span class="overline">Passend dazu</span><h2>Weitere Produkte aus dieser Kategorie.</h2></div></div>
+      <div class="product-grid">{% for product in related %}{% include "shop/_product_card.html" %}{% endfor %}</div>
+    </div>
+    {% endif %}
   </div>
 </section>
 {% endblock %}
