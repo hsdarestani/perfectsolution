@@ -4,57 +4,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#10231f">
-  <meta name="description" content="Perfect Solution GmbH. Professioneller Reinigungsbedarf und Hygiene für Unternehmen.">
+  <meta name="theme-color" content="#174b3f">
+  <meta name="description" content="Perfect Solution GmbH. Reinigungsbedarf, Hygieneartikel und Zubehör für Unternehmen.">
   <title>{% block title %}Perfect Solution GmbH{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'shop/site.css' %}">
 </head>
 <body>
-  <div class="topline">
-    <div class="container topline-inner">
-      <div><span class="live-dot"></span> Fachgroßhandel für Reinigung und Hygiene</div>
-      <div class="top-links">
-        <span>Dietzenbach</span>
-        <a href="{% url 'shop:home' %}#business">Geschäftskonto</a>
+  <div class="service-top">
+    <div class="container service-top-inner">
+      <span>Perfect Solution GmbH · Dietzenbach</span>
+      <div>
+        <a href="{% url 'shop:home' %}#business">Geschäftskonto beantragen</a>
         <a href="/admin/">Verwaltung</a>
       </div>
     </div>
   </div>
 
-  <header class="header">
-    <div class="container header-inner">
-      <a class="logo" href="{% url 'shop:home' %}">
-        <span class="logo-box">PS</span>
-        <span class="logo-word"><strong>Perfect Solution</strong><small>PROFESSIONAL HYGIENE</small></span>
+  <header class="shop-header">
+    <div class="container header-row">
+      <a class="shop-logo" href="{% url 'shop:home' %}">
+        <span class="shop-logo-mark">PS</span>
+        <span><strong>Perfect Solution</strong><small>PROFESSIONAL HYGIENE</small></span>
       </a>
 
-      <form class="searchbar" action="{% url 'shop:product_list' %}" method="get">
-        <svg viewBox="0 0 24 24"><path d="m21 21-4.3-4.3m1.3-5.2a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"/></svg>
-        <input type="search" name="q" value="{{ query|default:'' }}" placeholder="Produkt, Artikelnummer oder EAN">
-        <button>Suchen</button>
+      <form class="shop-search" action="{% url 'shop:product_list' %}" method="get">
+        <input type="search" name="q" value="{{ query|default:'' }}" placeholder="Was suchen Sie? Produktname, Artikelnummer oder EAN">
+        <button type="submit">Suchen</button>
       </form>
 
-      <div class="header-side">
-        <a class="account-link" href="{% url 'shop:home' %}#business">
-          <small>Geschäftskunden</small>
-          <strong>Konto anfragen</strong>
+      <div class="header-links">
+        <a href="{% url 'shop:home' %}#business">
+          <span>Kundenkonto</span>
+          <strong>Beantragen</strong>
         </a>
-        <a class="basket" href="{% url 'shop:cart' %}">
-          <span class="basket-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 7h16l-1.4 11H5.4L4 7Zm4 0 2-4h4l2 4"/></svg>
-          </span>
-          <span><small>Warenkorb</small><strong>{{ cart_count }} Artikel</strong></span>
+        <a class="cart-link" href="{% url 'shop:cart' %}">
+          <span>Warenkorb</span>
+          <strong>{{ cart_count }} Artikel</strong>
         </a>
       </div>
     </div>
 
-    <nav class="mainnav">
-      <div class="container mainnav-inner">
-        <a class="nav-all" href="{% url 'shop:product_list' %}"><span>☰</span> Alle Produkte</a>
-        {% for category in categories|slice:":7" %}
+    <nav class="shop-nav">
+      <div class="container shop-nav-inner">
+        <a class="nav-main" href="{% url 'shop:product_list' %}">Alle Produkte</a>
+        {% for category in categories %}
         <a href="{% url 'shop:product_list' %}?category={{ category.slug }}">{{ category.name }}</a>
         {% endfor %}
       </div>
@@ -64,36 +60,36 @@
   {% if messages %}
   <div class="container messages">
     {% for message in messages %}
-    <div class="message"><b>✓</b><span>{{ message }}</span></div>
+    <div class="message">{{ message }}</div>
     {% endfor %}
   </div>
   {% endif %}
 
   <main>{% block content %}{% endblock %}</main>
 
-  <section class="assurance">
-    <div class="container assurance-grid">
-      <div><b>01</b><span><strong>Fachsortiment</strong><small>Für den professionellen Einsatz</small></span></div>
-      <div><b>02</b><span><strong>Klare Verfügbarkeit</strong><small>Bestand direkt sichtbar</small></span></div>
-      <div><b>03</b><span><strong>Persönlicher Kontakt</strong><small>Direkte Beratung für Unternehmen</small></span></div>
-      <div><b>04</b><span><strong>Rhein Main</strong><small>Standort Dietzenbach</small></span></div>
+  <section class="shop-service">
+    <div class="container shop-service-grid">
+      <div><strong>Großes Sortiment</strong><span>Reinigung und Hygiene für Profis</span></div>
+      <div><strong>Persönliche Beratung</strong><span>Direkter Kontakt bei Fragen</span></div>
+      <div><strong>Einfache Bestellung</strong><span>Produkte schnell finden und bestellen</span></div>
+      <div><strong>Standort Dietzenbach</strong><span>Für Kunden im Rhein Main Gebiet</span></div>
     </div>
   </section>
 
-  <footer class="footer">
+  <footer class="shop-footer">
     <div class="container footer-grid">
-      <div class="footer-company">
-        <a class="logo footer-logo" href="{% url 'shop:home' %}">
-          <span class="logo-box">PS</span>
-          <span class="logo-word"><strong>Perfect Solution</strong><small>PROFESSIONAL HYGIENE</small></span>
+      <div class="footer-about">
+        <a class="shop-logo footer-logo" href="{% url 'shop:home' %}">
+          <span class="shop-logo-mark">PS</span>
+          <span><strong>Perfect Solution</strong><small>PROFESSIONAL HYGIENE</small></span>
         </a>
         <p>Professioneller Reinigungsbedarf für Unternehmen, Gebäudereinigung, Gastronomie, Praxen und Objektservice.</p>
       </div>
-      <div class="footer-col"><strong>Shop</strong><a href="{% url 'shop:product_list' %}">Produkte</a><a href="{% url 'shop:cart' %}">Warenkorb</a><a href="{% url 'shop:home' %}#business">Geschäftskonto</a></div>
-      <div class="footer-col"><strong>Sortiment</strong>{% for category in categories|slice:":4" %}<a href="{% url 'shop:product_list' %}?category={{ category.slug }}">{{ category.name }}</a>{% endfor %}</div>
+      <div class="footer-col"><strong>Shop</strong><a href="{% url 'shop:product_list' %}">Alle Produkte</a><a href="{% url 'shop:cart' %}">Warenkorb</a><a href="{% url 'shop:home' %}#business">Geschäftskonto</a></div>
+      <div class="footer-col"><strong>Kategorien</strong>{% for category in categories|slice:":5" %}<a href="{% url 'shop:product_list' %}?category={{ category.slug }}">{{ category.name }}</a>{% endfor %}</div>
       <div class="footer-col"><strong>Unternehmen</strong><span>Perfect Solution GmbH</span><span>Dietzenbach</span><span>Deutschland</span></div>
     </div>
-    <div class="container footer-bottom"><span>© 2026 Perfect Solution GmbH</span><span>Professionelle Beschaffung für Reinigung und Hygiene</span></div>
+    <div class="container footer-bottom">© 2026 Perfect Solution GmbH</div>
   </footer>
 </body>
 </html>

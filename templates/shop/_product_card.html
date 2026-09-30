@@ -1,28 +1,28 @@
 <article class="product-card">
   <a class="product-image" href="{{ product.get_absolute_url }}">
-    <div class="product-flags">
-      {% if product.featured %}<span>EMPFOHLEN</span>{% endif %}
-      {% if product.stock <= 0 %}<span class="muted">NICHT VERFÜGBAR</span>{% endif %}
-    </div>
     {% if product.image %}
       <img src="{{ product.image.url }}" alt="{{ product.name }}">
     {% else %}
-      <div class="product-empty"><b>PS</b><span>PROFESSIONAL HYGIENE</span></div>
+      <div class="product-placeholder"><strong>PS</strong><span>Perfect Solution</span></div>
     {% endif %}
   </a>
   <div class="product-content">
-    <div class="product-topline"><span>{{ product.category.name }}</span><span>{{ product.sku }}</span></div>
+    <div class="product-meta">{{ product.category.name }}</div>
     <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
-    <p>{{ product.short_description|default:"Professioneller Reinigungsbedarf für den täglichen gewerblichen Einsatz." }}</p>
-    <div class="availability {% if product.stock <= 0 %}out{% elif product.stock <= 5 %}low{% endif %}">
-      <i></i><span>{{ product.stock_label }}</span>
+    <div class="product-number">Artikelnummer: {{ product.sku }}</div>
+    <p>{{ product.short_description|default:"Professioneller Reinigungsbedarf für den täglichen Einsatz." }}</p>
+    <div class="product-stock {% if product.stock <= 0 %}out{% endif %}">
+      {% if product.stock > 0 %}● Auf Lager{% else %}● Nicht auf Lager{% endif %}
     </div>
-    <div class="product-bottom">
-      <div class="product-price"><strong>{{ product.net_price|floatformat:2 }} €</strong><small>netto je {{ product.unit }}</small></div>
+    <div class="product-buy">
+      <div class="price">
+        <strong>{{ product.net_price|floatformat:2 }} €</strong>
+        <span>netto / {{ product.unit }}</span>
+      </div>
       <form method="post" action="{% url 'shop:cart_add' product.id %}">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ request.get_full_path }}">
-        <button aria-label="{{ product.name }} in den Warenkorb" {% if product.stock <= 0 %}disabled{% endif %}>+</button>
+        <button type="submit" {% if product.stock <= 0 %}disabled{% endif %}>In den Warenkorb</button>
       </form>
     </div>
   </div>

@@ -1,46 +1,43 @@
 {% extends "shop/base.html" %}
 {% block title %}Produkte | Perfect Solution GmbH{% endblock %}
 {% block content %}
-<section class="catalog-head">
-  <div class="container catalog-head-inner">
-    <div><span class="overline">Produktkatalog</span><h1>Professionelles Sortiment.</h1><p>{% if query %}Suchergebnisse für „{{ query }}“{% else %}Reinigung, Hygiene und Objektbedarf für Unternehmen.{% endif %}</p></div>
-    <div class="catalog-count"><strong>{{ products|length }}</strong><span>Ergebnisse</span></div>
+<section class="page-title">
+  <div class="container">
+    <h1>Produkte</h1>
+    <p>{% if query %}Suchergebnisse für „{{ query }}“{% else %}Reinigungsbedarf und Hygieneartikel für den professionellen Einsatz.{% endif %}</p>
   </div>
 </section>
 
-<section class="catalog">
+<section class="catalog-section">
   <div class="container catalog-layout">
-    <aside class="filters">
-      <div class="filters-title"><small>Navigation</small><strong>Kategorien</strong></div>
-      <a class="{% if not active_category %}active{% endif %}" href="{% url 'shop:product_list' %}">Alle Produkte <span>→</span></a>
+    <aside class="catalog-sidebar">
+      <h2>Kategorien</h2>
+      <a class="{% if not active_category %}active{% endif %}" href="{% url 'shop:product_list' %}">Alle Produkte</a>
       {% for category in categories %}
       <a class="{% if active_category == category.slug %}active{% endif %}" href="{% url 'shop:product_list' %}?category={{ category.slug }}">
-        {{ category.name }} <span>{{ category.product_count }}</span>
+        <span>{{ category.name }}</span><small>{{ category.product_count }}</small>
       </a>
       {% endfor %}
-      <div class="filter-help"><strong>Produkt nicht gefunden?</strong><p>Die Produktdatenbank wird laufend erweitert.</p><a href="{% url 'shop:home' %}#business">Kontakt aufnehmen →</a></div>
     </aside>
 
     <div class="catalog-main">
       <form class="catalog-toolbar" method="get">
         {% if query %}<input type="hidden" name="q" value="{{ query }}">{% endif %}
         {% if active_category %}<input type="hidden" name="category" value="{{ active_category }}">{% endif %}
-        <label class="stock-check"><input type="checkbox" name="stock" value="available" {% if stock_filter == 'available' %}checked{% endif %} onchange="this.form.submit()"> Nur verfügbare Produkte</label>
-        <div class="sort-wrap">
-          <span>Sortieren</span>
-          <select name="sort" onchange="this.form.submit()">
-            <option value="name" {% if sort == 'name' %}selected{% endif %}>Name</option>
-            <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Preis aufsteigend</option>
-            <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Preis absteigend</option>
-            <option value="new" {% if sort == 'new' %}selected{% endif %}>Neueste zuerst</option>
-          </select>
-        </div>
+        <label><input type="checkbox" name="stock" value="available" {% if stock_filter == 'available' %}checked{% endif %} onchange="this.form.submit()"> Nur verfügbare Produkte</label>
+        <select name="sort" onchange="this.form.submit()">
+          <option value="name" {% if sort == 'name' %}selected{% endif %}>Sortierung: Name</option>
+          <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Preis aufsteigend</option>
+          <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Preis absteigend</option>
+          <option value="new" {% if sort == 'new' %}selected{% endif %}>Neueste zuerst</option>
+        </select>
       </form>
 
+      <div class="results-info">{{ products|length }} Produkte</div>
       <div class="product-grid catalog-grid">
         {% for product in products %}{% include "shop/_product_card.html" %}
         {% empty %}
-        <div class="empty-results"><strong>Keine Produkte gefunden.</strong><p>Bitte Suche oder Filter ändern.</p><a class="btn primary" href="{% url 'shop:product_list' %}">Alle Produkte anzeigen</a></div>
+        <div class="empty-results"><h2>Keine Produkte gefunden</h2><p>Bitte ändern Sie Suche oder Filter.</p><a class="button primary" href="{% url 'shop:product_list' %}">Alle Produkte anzeigen</a></div>
         {% endfor %}
       </div>
     </div>

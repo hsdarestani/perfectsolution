@@ -1,71 +1,52 @@
 {% extends "shop/base.html" %}
-{% block title %}Perfect Solution GmbH | Reinigungsbedarf für Unternehmen{% endblock %}
+{% block title %}Perfect Solution GmbH | Reinigungsbedarf und Hygiene{% endblock %}
 {% block content %}
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <span class="overline">B2B Fachgroßhandel</span>
-      <h1>Professionelle Reinigung. <span>Beschaffung, die funktioniert.</span></h1>
-      <p>Reinigungsmittel, Hygieneartikel und professioneller Objektbedarf für Unternehmen. Klar strukturiert, schnell gefunden und direkt bestellbar.</p>
-      <div class="hero-actions">
-        <a class="btn primary" href="{% url 'shop:product_list' %}">Sortiment ansehen <span>→</span></a>
-        <a class="btn secondary" href="#business">Geschäftskonto anfragen</a>
+<section class="simple-hero">
+  <div class="container simple-hero-grid">
+    <div class="simple-hero-copy">
+      <span class="hero-label">Fachhandel für Reinigung und Hygiene</span>
+      <h1>Reinigungsbedarf für Unternehmen</h1>
+      <p>Reinigungsmittel, Hygieneartikel, Tücher, Mopps, Arbeitsschutz und Zubehör für den professionellen Einsatz.</p>
+      <div class="simple-hero-actions">
+        <a class="button primary" href="{% url 'shop:product_list' %}">Alle Produkte ansehen</a>
+        <a class="button secondary" href="#business">Geschäftskonto beantragen</a>
       </div>
-      <div class="hero-facts">
-        <div><strong>8</strong><span>Sortimentsbereiche</span></div>
-        <div><strong>B2B</strong><span>Profi Einkauf</span></div>
-        <div><strong>DE</strong><span>Dietzenbach</span></div>
-      </div>
+      <ul class="hero-list">
+        <li>Klare Produktübersicht</li>
+        <li>Preise netto für Geschäftskunden</li>
+        <li>Persönliche Beratung</li>
+      </ul>
     </div>
-
-    <div class="hero-media">
-      <img src="https://images.pexels.com/photos/6197122/pexels-photo-6197122.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Professionelle Reinigung">
-      <div class="media-caption">
-        <span>PERFECT SOLUTION</span>
-        <strong>Professional Hygiene Supply</strong>
-      </div>
+    <div class="simple-hero-image">
+      <img src="https://images.pexels.com/photos/6197122/pexels-photo-6197122.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Professionelle Reinigung">
     </div>
-  </div>
-
-  <div class="container quick-order">
-    <div class="quick-order-label">
-      <small>Schnellbestellung</small>
-      <strong>Artikel direkt finden</strong>
-    </div>
-    <form action="{% url 'shop:product_list' %}" method="get">
-      <input type="search" name="q" placeholder="Artikelnummer, EAN oder Produktname">
-      <button>Produkt suchen <span>→</span></button>
-    </form>
-    <div class="quick-order-note">Ideal für regelmäßige Nachbestellungen</div>
   </div>
 </section>
 
-<section class="section categories-section">
+<section class="section category-home">
   <div class="container">
-    <div class="section-title">
-      <div><span class="overline">Sortiment</span><h2>Direkt zum richtigen Bereich.</h2></div>
-      <p>Keine überladene Navigation. Die wichtigsten Bereiche für Reinigung und Hygiene auf einen Blick.</p>
-      <a href="{% url 'shop:product_list' %}">Alle Produkte <span>→</span></a>
+    <div class="simple-heading">
+      <div><span>Sortiment</span><h2>Produktkategorien</h2></div>
+      <a href="{% url 'shop:product_list' %}">Alle Produkte ansehen</a>
     </div>
 
-    <div class="category-list">
+    <div class="category-grid">
       {% for category in categories %}
-      <a class="category-row" href="{% url 'shop:product_list' %}?category={{ category.slug }}">
-        <span class="category-index">{{ forloop.counter|stringformat:"02d" }}</span>
+      <a class="category-box" href="{% url 'shop:product_list' %}?category={{ category.slug }}">
         <strong>{{ category.name }}</strong>
-        <span class="category-count">{{ category.product_count }} Produkte</span>
-        <span class="category-arrow">→</span>
+        <span>{{ category.product_count }} Produkte</span>
+        <b>Zur Kategorie →</b>
       </a>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="section products-section">
+<section class="section home-products">
   <div class="container">
-    <div class="section-title product-title">
-      <div><span class="overline">Auswahl</span><h2>Produkte für den täglichen Bedarf.</h2></div>
-      <a href="{% url 'shop:product_list' %}">Gesamtes Sortiment <span>→</span></a>
+    <div class="simple-heading">
+      <div><span>Produkte</span><h2>Beliebte Artikel</h2></div>
+      <a href="{% url 'shop:product_list' %}">Gesamtes Sortiment</a>
     </div>
     <div class="product-grid">
       {% for product in products %}{% include "shop/_product_card.html" %}{% endfor %}
@@ -73,42 +54,43 @@
   </div>
 </section>
 
-<section class="procurement">
-  <div class="container procurement-grid">
-    <div class="procurement-copy">
-      <span class="overline light">Für Unternehmen</span>
-      <h2>Einkauf ohne unnötige Umwege.</h2>
-      <p>Perfect Solution ist für Unternehmen gedacht, die Verbrauchsmaterial und Reinigungsbedarf effizient beschaffen wollen.</p>
+<section class="help-section">
+  <div class="container help-grid">
+    <div>
+      <h2>Sie finden ein Produkt nicht?</h2>
+      <p>Bei Fragen zum Sortiment oder zur Auswahl des passenden Produkts helfen wir gerne persönlich weiter.</p>
     </div>
-    <div class="procurement-points">
-      <div><b>01</b><span><strong>Produkte schnell finden</strong><small>Suche über Name, Artikelnummer oder EAN</small></span></div>
-      <div><b>02</b><span><strong>Bestand direkt sehen</strong><small>Verfügbarkeit vor der Bestellung prüfen</small></span></div>
-      <div><b>03</b><span><strong>Bestellungen zentral verwalten</strong><small>Klare Abläufe für wiederkehrenden Bedarf</small></span></div>
-    </div>
+    <a class="button light" href="#business">Kontakt aufnehmen</a>
   </div>
 </section>
 
-<section class="business" id="business">
+<section class="business-section" id="business">
   <div class="container business-grid">
-    <div class="business-intro">
-      <span class="overline">Geschäftskonto</span>
-      <h2>Für regelmäßigen Bedarf und direkten Kontakt.</h2>
-      <p>Kurze Anfrage senden. Die Angaben landen direkt im Verwaltungssystem von Perfect Solution.</p>
+    <div class="business-copy">
+      <span>Geschäftskonto</span>
+      <h2>Kundenkonto beantragen</h2>
+      <p>Füllen Sie das kurze Formular aus. Nach der Prüfung kann das Konto für Geschäftskunden freigeschaltet werden.</p>
+      <ul>
+        <li>Für Unternehmen und Gewerbekunden</li>
+        <li>Einfache Nachbestellung</li>
+        <li>Direkte Betreuung</li>
+      </ul>
     </div>
+
     <form class="business-form" method="post" action="{% url 'shop:business_account_request' %}">
       {% csrf_token %}
-      <div class="form-title"><span>Firmenanfrage</span><strong>Geschäftskonto anfragen</strong></div>
+      <h3>Firmenanfrage</h3>
       <div class="field"><label>Unternehmen</label>{{ account_form.company }}</div>
-      <div class="form-pair">
+      <div class="field-row">
         <div class="field"><label>Ansprechpartner</label>{{ account_form.name }}</div>
         <div class="field"><label>Telefon</label>{{ account_form.phone }}</div>
       </div>
-      <div class="form-pair">
+      <div class="field-row">
         <div class="field"><label>E Mail</label>{{ account_form.email }}</div>
         <div class="field"><label>USt ID</label>{{ account_form.vat_id }}</div>
       </div>
-      <label class="checkbox-row">{{ account_form.consent }} <span>Datenschutzhinweise akzeptieren</span></label>
-      <button class="btn primary full" type="submit">Anfrage senden <span>→</span></button>
+      <label class="checkbox">{{ account_form.consent }} <span>Datenschutzhinweise akzeptieren</span></label>
+      <button class="button primary full" type="submit">Anfrage senden</button>
     </form>
   </div>
 </section>
