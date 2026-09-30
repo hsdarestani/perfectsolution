@@ -42,6 +42,10 @@ jobs:
           "$S/venv/bin/pip" install -q --upgrade pip
           "$S/venv/bin/pip" install -q --upgrade -r "$R/requirements.txt"
 
+          set -a
+          . "$S/.env"
+          set +a
+
           ln -sfn "$R" /opt/perfectsolution/current
           cd /opt/perfectsolution/current
 
