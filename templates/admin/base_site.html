@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}{{ title }} | Perfect Solution{% endblock %}
+{% block extrastyle %}
+{{ block.super }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'admin/perfect.css' %}">
+{% endblock %}
+{% block branding %}
+<div class="ps-admin-brand">
+  <span class="ps-admin-logo"><i></i><i></i><i></i></span>
+  <div>
+    <strong>Perfect Solution</strong>
+    <small>SHOP VERWALTUNG</small>
+  </div>
+</div>
+{% endblock %}
+{% block nav-global %}
+<a class="ps-store-link" href="/">Shop öffnen ↗</a>
+{% endblock %}

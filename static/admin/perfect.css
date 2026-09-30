@@ -1,0 +1,46 @@
+:root{
+  --ps-green:#0b3b35;
+  --ps-green-2:#0f5148;
+  --ps-accent:#c7f45b;
+  --ps-bg:#f4f6f4;
+  --ps-border:#dfe5e1;
+  --ps-text:#17231f;
+}
+body{font-family:Inter,Arial,sans-serif;background:var(--ps-bg);color:var(--ps-text)}
+#header{background:#0a2723;color:#fff;padding:0 28px;height:76px;display:flex;align-items:center;box-shadow:none}
+#branding{display:flex;align-items:center}
+.ps-admin-brand{display:flex;align-items:center;gap:12px}
+.ps-admin-logo{position:relative;width:42px;height:42px;border-radius:13px;background:#fff;display:block}
+.ps-admin-logo i{position:absolute;display:block;border-radius:50%;background:var(--ps-green)}
+.ps-admin-logo i:nth-child(1){width:13px;height:13px;left:8px;top:8px}
+.ps-admin-logo i:nth-child(2){width:9px;height:9px;right:8px;top:10px}
+.ps-admin-logo i:nth-child(3){width:12px;height:12px;left:15px;bottom:7px}
+.ps-admin-brand strong,.ps-admin-brand small{display:block}
+.ps-admin-brand strong{font:800 17px Manrope;color:#fff}
+.ps-admin-brand small{font-size:8px;letter-spacing:1.7px;color:#a8c4bd;margin-top:3px}
+#user-tools{font-size:11px;color:#b9ccc7}
+#user-tools a{color:#fff;border-bottom:0}
+.ps-store-link{color:#0a2723!important;background:var(--ps-accent);border-radius:9px;padding:9px 13px;font-weight:800;font-size:11px}
+div.breadcrumbs{background:#123d37;color:#bcd1cc;padding:13px 28px}
+div.breadcrumbs a{color:#fff}
+#content{padding:28px}
+#content h1{font:800 30px Manrope;color:var(--ps-text);letter-spacing:-.8px}
+.module,.inline-group{border:1px solid var(--ps-border)!important;border-radius:14px!important;overflow:hidden;background:#fff;box-shadow:0 8px 25px rgba(20,45,36,.04)}
+.module h2,.module caption,.inline-group h2{background:#edf2ef!important;color:#243b34!important;font:700 12px Inter!important;letter-spacing:.2px;padding:13px 15px!important}
+.dashboard .module table th{width:100%}
+.dashboard .module table td{white-space:nowrap}
+a:link,a:visited{color:#0f6a5d}
+.button,input[type=submit],input[type=button],.submit-row input,a.button{background:var(--ps-green)!important;border-radius:8px!important;border:0!important;font-weight:700!important}
+.button.default,input[type=submit].default,.submit-row input.default{background:var(--ps-green)!important}
+.button:hover,input[type=submit]:hover{background:var(--ps-green-2)!important}
+input,textarea,select,.vTextField{border:1px solid #d7dfda!important;border-radius:8px!important;padding:9px 10px!important;background:#fff!important}
+input:focus,textarea:focus,select:focus{border-color:#4b8b7e!important;box-shadow:0 0 0 3px rgba(75,139,126,.12)!important;outline:0}
+#changelist .actions{background:#fff;border-radius:12px;border:1px solid var(--ps-border);padding:12px}
+#changelist table{background:#fff;border-radius:12px;overflow:hidden}
+#changelist table thead th{background:#eef2f0;color:#34483f}
+#changelist-filter{background:#fff;border-left:1px solid var(--ps-border)}
+#changelist-filter h2{background:#0f3d36!important;color:#fff!important}
+.object-tools a:link,.object-tools a:visited{background:#183d36;border-radius:8px}
+.submit-row{background:#fff;border:1px solid var(--ps-border);border-radius:12px}
+.selector .selector-available h2,.selector .selector-chosen h2{background:#123d37!important}
+@media(max-width:767px){#header{padding:12px 16px;height:auto;gap:10px;flex-wrap:wrap}.ps-store-link{display:none}#content{padding:16px}.ps-admin-brand strong{font-size:15px}}

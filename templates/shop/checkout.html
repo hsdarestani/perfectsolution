@@ -1,1 +1,76 @@
-{% extends "shop/base.html" %}{% block content %}<section class="page"><div class="wrap"><h1>Checkout</h1></div></section><section class="section"><div class="wrap checkout"><form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn">Zahlungspflichtig bestellen</button></form><aside class="sum"><h3>Bestellung</h3>{% for item in cart %}<p>{{ item.quantity }} × {{ item.product.name }} <b>{{ item.gross_total|floatformat:2 }} €</b></p>{% endfor %}<h3>Gesamt <b>{{ totals.gross|floatformat:2 }} €</b></h3></aside></div></section>{% endblock %}
+{% extends "shop/base.html" %}
+{% block title %}Checkout | Perfect Solution{% endblock %}
+{% block content %}
+<section class="inner-hero checkout-hero">
+  <div class="shell">
+    <span class="section-kicker">Bestellung abschließen</span>
+    <h1>Checkout</h1>
+    <p>Firmendaten, Adressen und Zahlungsart sicher erfassen.</p>
+  </div>
+</section>
+
+<section class="checkout-section">
+  <div class="shell checkout-layout">
+    <form class="checkout-form" method="post">
+      {% csrf_token %}
+      {% if form.errors %}
+      <div class="form-error">
+        <strong>Bitte Angaben prüfen.</strong>
+        <span>Ein oder mehrere Felder sind noch nicht vollständig.</span>
+      </div>
+      {% endif %}
+
+      <div class="checkout-card">
+        <div class="checkout-card-head"><span>01</span><div><strong>Kundendaten</strong><small>Wer bestellt?</small></div></div>
+        <div class="form-two">
+          <div class="field"><label for="{{ form.company.id_for_label }}">Unternehmen</label>{{ form.company }}</div>
+          <div class="field"><label for="{{ form.customer_name.id_for_label }}">Name</label>{{ form.customer_name }}</div>
+        </div>
+        <div class="form-two">
+          <div class="field"><label for="{{ form.email.id_for_label }}">E Mail</label>{{ form.email }}</div>
+          <div class="field"><label for="{{ form.phone.id_for_label }}">Telefon</label>{{ form.phone }}</div>
+        </div>
+      </div>
+
+      <div class="checkout-card">
+        <div class="checkout-card-head"><span>02</span><div><strong>Adressen</strong><small>Rechnung und Lieferung</small></div></div>
+        <div class="field"><label for="{{ form.billing_address.id_for_label }}">Rechnungsadresse</label>{{ form.billing_address }}</div>
+        <label class="check-row">{{ form.same_address }} <span>Lieferadresse entspricht Rechnungsadresse</span></label>
+        <div class="field"><label for="{{ form.shipping_address.id_for_label }}">Lieferadresse</label>{{ form.shipping_address }}</div>
+      </div>
+
+      <div class="checkout-card">
+        <div class="checkout-card-head"><span>03</span><div><strong>Zahlung</strong><small>Gewünschte Zahlungsart</small></div></div>
+        <div class="field"><label for="{{ form.payment_method.id_for_label }}">Zahlungsart</label>{{ form.payment_method }}</div>
+        <div class="field"><label for="{{ form.customer_note.id_for_label }}">Bestellhinweis</label>{{ form.customer_note }}</div>
+        <label class="check-row">{{ form.consent }} <span>Datenschutzhinweise akzeptieren</span></label>
+      </div>
+
+      <button class="button button-primary checkout-submit" type="submit">Zahlungspflichtig bestellen <span>→</span></button>
+    </form>
+
+    <aside class="checkout-summary">
+      <div class="summary-head">
+        <span>Ihre Auswahl</span>
+        <h2>Bestellung</h2>
+      </div>
+      <div class="checkout-items">
+        {% for item in cart %}
+        <div class="checkout-item">
+          <span class="checkout-qty">{{ item.quantity }}×</span>
+          <div><strong>{{ item.product.name }}</strong><small>{{ item.product.sku }}</small></div>
+          <b>{{ item.gross_total|floatformat:2 }} €</b>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="summary-row"><span>Netto</span><strong>{{ totals.net|floatformat:2 }} €</strong></div>
+      <div class="summary-row"><span>MwSt.</span><strong>{{ totals.vat|floatformat:2 }} €</strong></div>
+      <div class="summary-total"><span>Gesamt</span><strong>{{ totals.gross|floatformat:2 }} €</strong></div>
+      <div class="checkout-safe">
+        <span>✓</span>
+        <p>Die Bestellung wird direkt im Perfect Solution Admin Panel gespeichert.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

@@ -1,1 +1,18 @@
-{% extends "shop/base.html" %}{% block content %}<section class="success"><div><span>✓</span><h1>Vielen Dank.</h1><p>Bestellung <b>{{ order.number }}</b> wurde gespeichert.</p><p>{{ order.gross_total|floatformat:2 }} € · {{ order.get_payment_method_display }}</p><a class="btn" href="/produkte/">Weiter einkaufen</a></div></section>{% endblock %}
+{% extends "shop/base.html" %}
+{% block title %}Bestellung eingegangen | Perfect Solution{% endblock %}
+{% block content %}
+<section class="success-section">
+  <div class="success-card">
+    <div class="success-mark">✓</div>
+    <span class="section-kicker">Bestellung eingegangen</span>
+    <h1>Vielen Dank.</h1>
+    <p>Ihre Bestellung wurde erfolgreich gespeichert und kann jetzt bearbeitet werden.</p>
+    <div class="success-info">
+      <div><span>Bestellnummer</span><strong>{{ order.number }}</strong></div>
+      <div><span>Zahlungsart</span><strong>{{ order.get_payment_method_display }}</strong></div>
+      <div><span>Gesamt</span><strong>{{ order.gross_total|floatformat:2 }} €</strong></div>
+    </div>
+    <a class="button button-primary" href="{% url 'shop:product_list' %}">Weiter einkaufen <span>→</span></a>
+  </div>
+</section>
+{% endblock %}

@@ -1,1 +1,76 @@
-{% extends "shop/base.html" %}{% block content %}<section class="page"><div class="wrap"><h1>Warenkorb</h1></div></section><section class="section"><div class="wrap cartLayout"><div>{% for item in cart %}<div class="line"><strong>{{ item.product.name }}</strong><form method="post" action="{% url 'shop:cart_update' item.product.id %}">{% csrf_token %}<input name="quantity" type="number" value="{{ item.quantity }}"><button>Aktualisieren</button></form><b>{{ item.net_total|floatformat:2 }} €</b></div>{% empty %}<p>Ihr Warenkorb ist leer.</p>{% endfor %}</div>{% if cart %}<aside class="sum"><p>Netto <b>{{ totals.net|floatformat:2 }} €</b></p><p>MwSt. <b>{{ totals.vat|floatformat:2 }} €</b></p><h3>Gesamt <b>{{ totals.gross|floatformat:2 }} €</b></h3><a class="btn" href="/checkout/">Weiter zum Checkout</a></aside>{% endif %}</div></section>{% endblock %}
+{% extends "shop/base.html" %}
+{% block title %}Warenkorb | Perfect Solution{% endblock %}
+{% block content %}
+<section class="inner-hero">
+  <div class="shell">
+    <span class="section-kicker">Ihre Auswahl</span>
+    <h1>Warenkorb</h1>
+    <p>Produkte prüfen, Mengen anpassen und Bestellung vorbereiten.</p>
+  </div>
+</section>
+
+<section class="cart-section">
+  <div class="shell cart-layout">
+    <div class="cart-content">
+      <div class="cart-head">
+        <strong>Produkte</strong>
+        <span>{{ cart_count }} Artikel</span>
+      </div>
+
+      {% for item in cart %}
+      <article class="cart-item">
+        <a class="cart-thumb" href="{{ item.product.get_absolute_url }}">
+          {% if item.product.image %}
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+          {% else %}
+            <span>PS</span>
+          {% endif %}
+        </a>
+        <div class="cart-product">
+          <small>{{ item.product.category.name }} · {{ item.product.sku }}</small>
+          <strong><a href="{{ item.product.get_absolute_url }}">{{ item.product.name }}</a></strong>
+          <span>{{ item.product.net_price|floatformat:2 }} € netto je {{ item.product.unit }}</span>
+        </div>
+        <form class="quantity-form" method="post" action="{% url 'shop:cart_update' item.product.id %}">
+          {% csrf_token %}
+          <label>Menge</label>
+          <div><input name="quantity" type="number" min="0" value="{{ item.quantity }}"><button type="submit">Aktualisieren</button></div>
+        </form>
+        <div class="cart-line-price">
+          <small>Zwischensumme</small>
+          <strong>{{ item.net_total|floatformat:2 }} €</strong>
+          <span>netto</span>
+        </div>
+        <form method="post" action="{% url 'shop:cart_remove' item.product.id %}">
+          {% csrf_token %}
+          <button class="remove-button" type="submit" aria-label="Produkt entfernen">×</button>
+        </form>
+      </article>
+      {% empty %}
+      <div class="empty-cart">
+        <div class="empty-cart-icon">□</div>
+        <h2>Der Warenkorb ist noch leer.</h2>
+        <p>Entdecken Sie das Sortiment und fügen Sie Produkte hinzu.</p>
+        <a class="button button-primary" href="{% url 'shop:product_list' %}">Zum Sortiment <span>→</span></a>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if cart %}
+    <aside class="order-summary">
+      <div class="summary-head">
+        <span>Bestellübersicht</span>
+        <h2>Zusammenfassung</h2>
+      </div>
+      <div class="summary-row"><span>Warenwert netto</span><strong>{{ totals.net|floatformat:2 }} €</strong></div>
+      <div class="summary-row"><span>MwSt.</span><strong>{{ totals.vat|floatformat:2 }} €</strong></div>
+      <div class="summary-row muted"><span>Versand</span><strong>im Checkout</strong></div>
+      <div class="summary-total"><span>Gesamt</span><strong>{{ totals.gross|floatformat:2 }} €</strong></div>
+      <a class="button button-primary full" href="{% url 'shop:checkout' %}">Weiter zum Checkout <span>→</span></a>
+      <a class="continue-link" href="{% url 'shop:product_list' %}">← Weiter einkaufen</a>
+      <div class="summary-note"><b>✓</b><span>Preise werden transparent als Netto und Brutto berechnet.</span></div>
+    </aside>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
